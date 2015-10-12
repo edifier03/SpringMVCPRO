@@ -17,4 +17,9 @@ public class TestServiceImpl implements ITestService {
 	public void setTestDao(ITestDao testDao) {
 		this.testDao = testDao;
 	}
+
+	@Override
+	public void getList(String param) {
+		testDao.getList(param);
+	}
 }
