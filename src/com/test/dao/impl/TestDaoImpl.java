@@ -1,11 +1,14 @@
 package com.test.dao.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.test.bean.TestBean;
 import com.test.dao.ITestDao;
 @Repository
 public class TestDaoImpl extends SqlSessionDaoSupport implements ITestDao {
@@ -16,6 +19,7 @@ public class TestDaoImpl extends SqlSessionDaoSupport implements ITestDao {
 
 	@Override
 	public void getList(String param) {
-		 this.getSqlSession().insert("com.mvc.damain.User.doInsert", "1231");
+		 List<TestBean> beanlist = this.getSqlSession().selectList("com.mvc.test.selectList", param);
+		 System.out.println(beanlist.size());
 	}
 }
