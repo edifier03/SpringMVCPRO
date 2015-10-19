@@ -48,8 +48,8 @@ public class AccessRight extends HandlerInterceptorAdapter{
 
 	        String username =  (String)request.getSession().getAttribute("user"); 
 	        
-	        List<TestBean> beanlist = sqlSessionFactory.openSession().selectList("com.mvc.test.selectList", "1");
-	        System.out.println(beanlist.size());
+//	        List<TestBean> beanlist = sqlSessionFactory.openSession().selectList("com.mvc.test.selectList", "1");
+//	        System.out.println(beanlist.size());
 	        
 	        if(username == null){  
 	        	request.getSession().setAttribute("user", "test");

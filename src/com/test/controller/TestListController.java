@@ -32,7 +32,7 @@ public class TestListController {
             @PathVariable("param") String param, ModelMap modelMap) throws Exception {  
         modelMap.put("listparam", param);  
         
-        testService.getList(param);
+//        testService.getList(param);
         
         return new ModelAndView("/login/hello", modelMap);  
     }  

@@ -32,12 +32,12 @@
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> 
 	
   	<!-- 设置必要的拦截器 -->
- 	<mvc:interceptors> 
+ 	<!--mvc:interceptors> 
  		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<bean class="publicTools.AccessRight" >
 				 <property name="sqlSessionFactory" ref="sqlSessionFactory" />
 			</bean>
 		</mvc:interceptor>
- 	</mvc:interceptors> 
+ 	</mvc:interceptors--> 
 </beans>
