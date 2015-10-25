@@ -13,22 +13,21 @@
 	 -->
 	<security:http auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>	
-		<!-- login-page 登陆页面 -->
-		<security:form-login 
-			login-page="/login/hello.jsp" 
-			default-target-url="/nologin/welcome.jsp"
-			authentication-failure-url="/login.jsp?error=true"/>
-		 <security:logout logout-success-url="/login?logout" />
-         <!-- enable csrf protection -->
-         <security:csrf />
+			<!-- login-page 登陆页面 -->
+			<security:form-login  default-target-url="/testlist/123"/>
+			<security:logout logout-success-url="/login?logout" />
+	        <!-- enable csrf protection -->
+	        <security:csrf />
+	        <!-- 自定义filter -->
+	        <security:custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="securityInterceptorFilter" />
 	</security:http>
-	
+
 	<!-- 指定一个自定义的authentication-manager :customUserDetailsService -->
-	<security:authentication-manager>
+	<!-- security:authentication-manager alias="authenticationManager">
 	        <security:authentication-provider user-service-ref="customUserDetailsService">
 	        		<security:password-encoder ref="passwordEncoder"/>
 	        </security:authentication-provider>
-	</security:authentication-manager>
+	</security:authentication-manager-->
 	
 	<!-- 对密码进行MD5编码 -->
 	<bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" id="passwordEncoder"/>
@@ -38,6 +37,25 @@
 		也可以理解成:以后我们和数据库操作就是通过customUserDetailsService来进行关联.
 	 -->
 	<bean id="customUserDetailsService" class="publicTools.Security.CustomUserDetailsService"/>
-	
+	 
+	 <bean id="securityInterceptorFilter" class="publicTools.Security.Filter.core.MySecurityFilter">  
+        <!-- 用户拥有的权限 -->  
+        <property name="authenticationManager" ref="myAuthenticationManager" />  
+        <!-- 用户是否拥有所请求资源的权限 -->  
+        <property name="accessDecisionManager" ref="myAccessDecisionManager" />  
+        <!-- 资源与权限对应关系 -->  
+        <property name="securityMetadataSource" ref="mySecurityMetadataSource" />  
+    </bean>  
+    <security:authentication-manager alias="myAuthenticationManager">  
+        <security:authentication-provider user-service-ref="myUserDetailServiceImpl" />  
+    </security:authentication-manager> 
+    <bean id="myAccessDecisionManager" class="publicTools.Security.Filter.core.MyAccessDecisionManager"/>
+    <bean id="mySecurityMetadataSource" class="publicTools.Security.Filter.core.MySecurityMetadataSource">  
+        
+    </bean>  
+    <bean id="myUserDetailServiceImpl" class="publicTools.Security.Filter.core.MyUserDetailServiceImpl">  
+       
+    </bean>  
+
 </beans>
 
