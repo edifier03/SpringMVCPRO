@@ -25,7 +25,7 @@ public class RestConstroller {
 		this.userService = userService;
 	}
 	public RestConstroller() {}  
-    @RequestMapping(value = "/login/{user}", method = RequestMethod.GET)  
+    @RequestMapping(value = "/login123/{user}", method = RequestMethod.GET)  
     public ModelAndView myMethod(HttpServletRequest request,HttpServletResponse response,   
             @PathVariable("user") String user, ModelMap modelMap) throws Exception {  
         modelMap.put("loginUser", user);  
@@ -33,7 +33,7 @@ public class RestConstroller {
         
         return new ModelAndView("/login/hello", modelMap);  
     }  
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)  
+    @RequestMapping(value = "/welcome1", method = RequestMethod.GET)  
     public String registPost() {  
         return "/welcome";  
     }  
